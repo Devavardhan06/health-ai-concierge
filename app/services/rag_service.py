@@ -5,9 +5,7 @@ import math
 from collections import Counter
 from typing import List, Tuple
 
-# ============================================================================
-# CONFIGURATION
-# ============================================================================
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 KNOWLEDGE_PATH = os.path.join(BASE_DIR, "knowledge", "clinic_data.txt")
 
@@ -15,24 +13,14 @@ KNOWLEDGE_PATH = os.path.join(BASE_DIR, "knowledge", "clinic_data.txt")
 TOP_K_RESULTS = 5
 MIN_SCORE_THRESHOLD = 0.1
 
-# ============================================================================
-# VALIDATION
-# ============================================================================
 if not os.path.exists(KNOWLEDGE_PATH):
     raise RuntimeError(
         f"Knowledge file not found at: {KNOWLEDGE_PATH}\n"
         "Expected path: backend/app/knowledge/clinic_data.txt"
     )
 
-# ============================================================================
-# LOAD KNOWLEDGE BASE
-# ============================================================================
 with open(KNOWLEDGE_PATH, "r", encoding="utf-8") as f:
     full_text = f.read()
-
-# ============================================================================
-# TEXT PROCESSING FUNCTIONS
-# ============================================================================
 
 def chunk_text(text: str, chunk_size: int = 400) -> List[str]:
     """
@@ -112,9 +100,6 @@ def calculate_tf_idf(query_tokens: List[str],
     
     return sum(tf_idf_scores)
 
-# ============================================================================
-# INITIALIZE KNOWLEDGE BASE
-# ============================================================================
 
 # Create chunks from knowledge base
 KNOWLEDGE_CHUNKS = chunk_text(full_text)
@@ -132,9 +117,6 @@ print(f"✓ Using TF-IDF retrieval algorithm")
 print(f"✓ Ready to serve queries")
 print("=" * 70 + "\n")
 
-# ============================================================================
-# RETRIEVAL FUNCTIONS
-# ============================================================================
 
 def retrieve_relevant_knowledge(query: str, top_k: int = TOP_K_RESULTS) -> str:
     """
@@ -224,9 +206,6 @@ def retrieve_relevant_knowledge(query: str, top_k: int = TOP_K_RESULTS) -> str:
     else:
         return "No relevant information found."
 
-# ============================================================================
-# DEBUG AND TESTING UTILITIES
-# ============================================================================
 
 def debug_retrieval(query: str, top_k: int = 5) -> None:
     """
@@ -304,9 +283,6 @@ def get_statistics() -> dict:
         "min_score_threshold": MIN_SCORE_THRESHOLD
     }
 
-# ============================================================================
-# TESTING
-# ============================================================================
 
 if __name__ == "__main__":
     print("\n" + "=" * 70)
