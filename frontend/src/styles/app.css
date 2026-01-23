@@ -1,5 +1,5 @@
 :root {
-  /* Brand Colors - Modern Blue/Indigo Theme */
+  /* Brand Colors - Premium Blue/Indigo/Cyan Theme */
   --primary: #2563eb;
   /* Royal Blue */
   --primary-hover: #1d4ed8;
@@ -9,6 +9,8 @@
   /* Indigo */
   --accent: #06b6d4;
   /* Cyan */
+  --accent-purple: #7c3aed;
+  /* Violet */
 
   /* Neutrals */
   --bg-body: #f8fafc;
@@ -33,10 +35,12 @@
   --warning: #f59e0b;
   --danger: #ef4444;
 
-  /* Gradients */
+  /* Gradients - Premium */
   --gradient-primary: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
   --gradient-surface: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
   --gradient-glow: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
+  --gradient-premium: linear-gradient(135deg, #2563eb 0%, #06b6d4 50%, #7c3aed 100%);
+  --gradient-subtle: linear-gradient(135deg, #f8fafc 0%, #e8f0ff 35%, #f0e8ff 65%, #f1f5f9 100%);
 
   /* Spacing */
   --container-width: 1500px;
@@ -48,6 +52,7 @@
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
   --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  --shadow-glow: 0 0 30px rgba(37, 99, 235, 0.1);
   --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
 
   --radius-sm: 8px;
@@ -726,6 +731,79 @@ textarea:focus {
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
 
+/* Premium GetStarted Page Buttons */
+.action-btn {
+  padding: 18px 32px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: left 0.5s ease;
+  z-index: 0;
+}
+
+.action-btn:hover::before {
+  left: 100%;
+}
+
+.action-btn > span {
+  position: relative;
+  z-index: 1;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: white;
+}
+
+.action-btn.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.35);
+}
+
+.action-btn.secondary {
+  background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+  color: white;
+}
+
+.action-btn.secondary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(6, 182, 212, 0.35);
+}
+
+.action-btn.tertiary {
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  color: white;
+}
+
+.action-btn.tertiary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(124, 58, 237, 0.35);
+}
+
+.action-btn:active {
+  transform: translateY(-1px);
+}
+
 /* Responsive */
 @media (max-width: 480px) {
   .login-container {
@@ -738,5 +816,10 @@ textarea:focus {
 
   .login-form {
     gap: 20px;
+  }
+
+  .action-btn {
+    padding: 14px 24px;
+    font-size: 0.95rem;
   }
 }
