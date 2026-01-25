@@ -15,6 +15,11 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 from fastapi.responses import JSONResponse
 from app.core.rate_limiter import limiter
+from app.core.config import settings
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -32,8 +37,19 @@ app.state.limiter = limiter
 
 @app.on_event("startup")
 def startup():
+    print("=" * 70)
+    print("🚀 BACKEND INITIALIZING")
+    print(f"📡 Database Host: {settings.masked_database_url}")
+    print("=" * 70)
+    
     # Create DB tables safely on startup
-    Base.metadata.create_all(bind=engine)
+    try:
+        Base.metadata.create_all(bind=engine)
+        print("✅ Database tables verified/created.")
+    except Exception as e:
+        print(f"❌ DATABASE ERROR: {e}")
+        # We don't exit here to allow logs to be flushed
+
 
 app.include_router(chat_router)
 app.include_router(booking_router)
